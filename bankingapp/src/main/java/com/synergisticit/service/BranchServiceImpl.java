@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.synergisticit.domain.Branch;
 import com.synergisticit.repository.BranchRepository;
 
+@Service
 public class BranchServiceImpl implements BranchService {
 
 	@Autowired

@@ -62,26 +62,37 @@ public class AppConfig {
 	}
 	
 	//@Bean (name ="sessionFactory")
-		@Bean (name ="entityManagerFactory")
+		@Bean //(name ="entityManagerFactory")
 		public LocalSessionFactoryBean sessionFactory() {
 			System.out.println("LocalSessionFactoryBean sessionFactory from AppConfig...");
 			LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 			sessionFactory.setDataSource(dataSource());
 			sessionFactory.setAnnotatedClasses(User.class);
 			sessionFactory.setPackagesToScan("com.synergisticit.domain");
-			sessionFactory.setHibernateProperties(hibernateProerties());
+			sessionFactory.setHibernateProperties(hibernateProperties());
 			
 			return sessionFactory;
 		}
-
 		
-		Properties hibernateProerties() {
-			Properties jpaProerties = new Properties();
-			jpaProerties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-			jpaProerties.setProperty("hibernate.show_SQL", "true");
+		@Primary
+		@Bean
+		public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+			LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+			entityManagerFactory.setDataSource(dataSource());
+			entityManagerFactory.setPackagesToScan("com.synergisticit.domain");
+			entityManagerFactory.setJpaProperties(hibernateProperties());
+			entityManagerFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+			
+			return entityManagerFactory;
+		}
+
+		Properties hibernateProperties() {
+			Properties jpaProperties = new Properties();
+			jpaProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+			jpaProperties.setProperty("hibernate.show_SQL", "true");
 			//jpaProerties.setProperty("hibernate.hbm2ddl.auto", "create");
-			jpaProerties.setProperty("hibernate.hbm2ddl.auto", "update");
-			return jpaProerties;
+			jpaProperties.setProperty("hibernate.hbm2ddl.auto", "update");
+			return jpaProperties;
 		}
 		
 	@Bean

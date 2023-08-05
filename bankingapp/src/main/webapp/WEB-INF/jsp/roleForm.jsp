@@ -29,6 +29,35 @@
 				
 			</table>
 		</f:form>
+		
+		<p/>
+		<p/>
+		
+		<c:if test="${not empty roles}">
+		<table border="1">
+			<tr>
+				<th>Role Id</th><th>Role Name</th>
+				<th>Users</th>
+				<th>Action</th>
+			</tr>
+			<c:forEach items="${roles}" var="r">
+				<tr>
+					<td>${r.getRoleId()}</td>
+					<td>${r.getRoleName()}</td>
+					<td>
+						<c:forEach items="${r.getUsers() }" var="user" >
+								${user.getUsername() }
+						</c:forEach>
+					</td>		
+					<td>
+						<a href="updateRole?roleId=${r.getRoleId()}">Update</a>
+						|
+						<a href="deleteRole?roleId=${r.getRoleId()}">Delete</a>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+		</c:if>
 	</div>
 </body>
 </html>

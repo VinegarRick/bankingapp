@@ -19,7 +19,7 @@ public class RoleValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Role role = (Role) target;
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "roleName", "role.roleName.empty", "RoleName is a required field.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "roleName", "role.roleName.empty", "Role name is a required field.");
 		
 		if (role.getRoleName().length() < 3) {
 			errors.rejectValue("roleName", "role.roleName", "Role name must have at least 3 characters");

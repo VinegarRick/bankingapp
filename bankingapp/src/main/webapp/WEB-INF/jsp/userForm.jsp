@@ -8,6 +8,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>User Form</title>
+<style>
+	.error {
+		color: red;
+		font-style: italic;
+		font-weight: bold;
+	}
+</style>
 </head>
 <body>
 <div align="center">
@@ -21,15 +28,35 @@
 
 <tr>
 <td>Name: </td><td> <f:input path="username" value="${u.username}"/></td>
+    <c:if test="${errors.hasFieldErrors('username') || errors.hasFieldErrors('user.username.length')}">
+    	<td> 
+			<f:errors path="username" cssClass="error"/>
+		<td>
+	</c:if>
+
 </tr>
 
 <tr>
-<td>Email: </td><td> <f:input path="email"  value="${u.email}"/></td>
+<td>Password: </td><td> <f:input path="password"  value="${u.password}"/></td>
+    <c:if test="${errors.hasFieldErrors('password') || errors.hasFieldErrors('user.password.length')}">
+		<td> 
+			<f:errors path="password" cssClass="error"/>
+		<td>
+	</c:if>
 </tr>
-
 <tr>
-<td>Mobile: </td><td> <f:input path="mobile" value="${u.mobile}"/></td>
-</tr>
+<td>Roles: </td>
+<td> 
+<c:forEach items="${roles}" var="r">
+	<c:choose>
+		<c:when test="${selectedRoles.contains(r) }">
+			<f:checkbox path="roles" label ="${r.roleName}" value="${r.roleId}" checked="true"/>
+		</c:when>
+	<c:otherwise>
+		<f:checkbox path="roles" label ="${r.roleName}" value="${r.roleId}" />
+	</c:otherwise>
+	</c:choose>
+</c:forEach>
 
 <tr>
 <td colspan="2" align="center"> <input type="submit" value="submit"></td>
@@ -40,16 +67,23 @@
 
 <p/>
 <p/>
+
+<c:if test="${not empty users}">
 <table border="1">
  <tr>
-	<th>User Id</th><th>Name</th><th>Email</th><th>Mobile</th><th>Action</th>
+	<th>User Id</th><th>Name</th>
+	<th>Roles</th>
+	<th>Action</th>
 </tr>
 <c:forEach items="${users}" var="u">
 	<tr>
 		<td>${u.getUserId()}</td>
 		<td>${u.getUsername()}</td>
-		<td>${u.getEmail()}</td>
-		<td>${u.getMobile()}</td>
+		<td>
+			<c:forEach items="${u.getRoles() }" var="role" >
+					${role.getRoleName() }
+			</c:forEach>
+		</td>		
 		<td>
 			<a href="updateUser?userId=${u.getUserId()}">Update</a>
 			|
@@ -58,6 +92,7 @@
 	</tr>
 </c:forEach>
 </table>
+</c:if>
 </div>
 </body>
 </html>

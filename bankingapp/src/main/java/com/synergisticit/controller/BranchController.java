@@ -19,20 +19,22 @@ public class BranchController {
 	@RequestMapping("branchForm")
 	public String branchForm(Branch branch, Model model) {
 		System.out.println("============branchForm============");
-		model.addAttribute("branchs", branchService.findAll());
+		model.addAttribute("branches", branchService.findAll());
 		
 		return "branchForm";
 	}
 	
 	
 	@RequestMapping("saveBranch")
-	public ModelAndView saveBranch(@ModelAttribute Branch branch) {
+	//public ModelAndView saveBranch(@ModelAttribute Branch branch) {
+	public String saveBranch(@ModelAttribute Branch branch) {
 		System.out.println("saveBranch - branch: "+branch);
-		ModelAndView mav = new ModelAndView("branchForm");
+		//ModelAndView mav = new ModelAndView("branchForm");
 		branchService.save(branch);
-		mav.addObject("branchs", branchService.findAll());
+		//mav.addObject("branches", branchService.findAll());
 		
-		return mav;
+		//return mav;
+		return "redirect:/branchForm";
 	}
 	
 	@RequestMapping("updateBranch")
@@ -40,7 +42,7 @@ public class BranchController {
 		System.out.println("updateBranch - branch: "+branch);
 		ModelAndView mav = new ModelAndView("branchForm");
 		mav.addObject("b", branchService.find(branch.getBranchId()));
-		mav.addObject("branchs", branchService.findAll());
+		mav.addObject("branches", branchService.findAll());
 		
 		return mav;
 	}
@@ -50,7 +52,7 @@ public class BranchController {
 		ModelAndView mav = new ModelAndView("branchForm");
 		System.out.println("deleteBranch - branch: "+branch);
 		branchService.delete(branch.getBranchId());
-		mav.addObject("branchs", branchService.findAll());
+		mav.addObject("branches", branchService.findAll());
 		
 		return mav;
 	}	

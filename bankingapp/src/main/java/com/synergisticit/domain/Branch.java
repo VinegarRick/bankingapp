@@ -1,10 +1,12 @@
 package com.synergisticit.domain;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -32,6 +34,8 @@ public class Branch {
 	@NotEmpty
 	private String branchName;
 	
+	@Valid
+	@Embedded
 	private Address branchAddress;
 	
 	@OneToMany(mappedBy="accountBranch")

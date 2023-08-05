@@ -43,7 +43,7 @@ public class Customer {
 	
 	private String realId;
 	
-	@OneToMany(mappedBy="accoutnCustomer")
+	@OneToMany(mappedBy="accountCustomer")
 	private List<Account> customerAccounts;
 	
 	@JoinColumn(name="userId")

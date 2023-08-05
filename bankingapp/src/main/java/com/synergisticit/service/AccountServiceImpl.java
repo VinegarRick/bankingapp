@@ -6,10 +6,12 @@ import java.util.Iterator;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.synergisticit.domain.Account;
 import com.synergisticit.repository.AccountRepository;
 
+@Service
 public class AccountServiceImpl implements AccountService {
 
 	@Autowired

@@ -7,19 +7,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.synergisticit.domain.Account;
 import com.synergisticit.domain.BankTransaction;
+import com.synergisticit.service.AccountService;
 import com.synergisticit.service.BankTransactionService;
 
 @Controller
 public class BankTransactionController {
 
-	@Autowired
-	BankTransactionService bankTransactionService;
+	@Autowired BankTransactionService bankTransactionService;
+	@Autowired AccountService accountService;
 	
 	@RequestMapping("bankTransactionForm")
 	public String bankTransactionForm(BankTransaction bankTransaction, Model model) {
 		System.out.println("============bankTransactionForm============");
 		model.addAttribute("bankTransactions", bankTransactionService.findAll());
+		
 		return "bankTransactionForm";
 	}
 	
@@ -28,8 +31,24 @@ public class BankTransactionController {
 	public ModelAndView saveBankTransaction(@ModelAttribute BankTransaction bankTransaction) {
 		System.out.println("saveBankTransaction - bankTransaction: "+bankTransaction);
 		ModelAndView mav = new ModelAndView("bankTransactionForm");
+				
+		double transactionAmount = bankTransaction.getTransactionAmount();
+		
+		Long toAccountId = bankTransaction.getBankTransactionToAccount();
+		if (toAccountId != null && toAccountId > 0) {
+			Account toAccount = accountService.find(toAccountId);
+			toAccount.setAccountBalance(toAccount.getAccountBalance() + transactionAmount);
+		}
+		
+		Long fromAccountId = bankTransaction.getBankTransactionFromAccount();
+		if (fromAccountId != null && fromAccountId > 0) {
+			Account fromAccount = accountService.find(fromAccountId);
+			fromAccount.setAccountBalance(fromAccount.getAccountBalance() - transactionAmount);
+		}
+		
 		bankTransactionService.save(bankTransaction);
 		mav.addObject("bankTransactions", bankTransactionService.findAll());
+		
 		return mav;
 	}
 	
@@ -39,6 +58,7 @@ public class BankTransactionController {
 		ModelAndView mav = new ModelAndView("bankTransactionForm");
 		mav.addObject("bt", bankTransactionService.find(bankTransaction.getBankTransactionId()));
 		mav.addObject("bankTransactions", bankTransactionService.findAll());
+		
 		return mav;
 	}
 	
@@ -48,6 +68,7 @@ public class BankTransactionController {
 		System.out.println("deleteBankTransaction - bankTransaction: "+bankTransaction);
 		bankTransactionService.delete(bankTransaction.getBankTransactionId());
 		mav.addObject("bankTransactions", bankTransactionService.findAll());
+		
 		return mav;
 	}	
 	

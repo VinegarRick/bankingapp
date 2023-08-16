@@ -61,7 +61,7 @@
 		<table border="1">
 			<tr>
 				<th>Branch Id</th><th>Branch Name</th><th>Branch Address 1</th><th>Branch Address 2</th><th>City</th><th>State</th><th>Country</th><th>ZIP Code</th>
-				<th>Accounts</th>
+				<th>Account IDs</th>
 				<th>Action</th>
 			</tr>
 			<c:forEach items="${branches}" var="b">
@@ -76,7 +76,7 @@
 					<td>${b.getBranchAddress().getZipcode()}</td>
 					<td>
 						<c:forEach items="${b.getBranchAccount() }" var="account" >
-								${account.getAccountHolder() }
+								${account.getAccountId() }
 						</c:forEach>
 					</td>		
 					<td>

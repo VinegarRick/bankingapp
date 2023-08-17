@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
@@ -31,6 +32,7 @@ import jakarta.persistence.EntityManagerFactory;
 
 @Configuration
 @PropertySource(value="classpath:db.properties")
+@ComponentScan(basePackages = {"com.synergisticit", "com.synergisticit.validation"})
 public class AppConfig {
 	@Autowired
 	Environment env;
@@ -51,6 +53,7 @@ public class AppConfig {
 		
 		return dataSource;
 	}
+	
 	
 	
 	@Bean

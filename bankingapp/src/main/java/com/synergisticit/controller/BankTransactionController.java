@@ -3,6 +3,10 @@ package com.synergisticit.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,12 +15,23 @@ import com.synergisticit.domain.Account;
 import com.synergisticit.domain.BankTransaction;
 import com.synergisticit.service.AccountService;
 import com.synergisticit.service.BankTransactionService;
+import com.synergisticit.validation.BankTransactionValidator;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class BankTransactionController {
 
 	@Autowired BankTransactionService bankTransactionService;
 	@Autowired AccountService accountService;
+	@Autowired BankTransactionValidator bankTransactionValidator;
+	
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.addValidators(bankTransactionValidator);
+		
+	}
 	
 	@RequestMapping("bankTransactionForm")
 	public String bankTransactionForm(BankTransaction bankTransaction, Model model) {
@@ -28,10 +43,15 @@ public class BankTransactionController {
 	
 	
 	@RequestMapping("saveBankTransaction")
-	public ModelAndView saveBankTransaction(@ModelAttribute BankTransaction bankTransaction) {
+	public ModelAndView saveBankTransaction(@ModelAttribute @Valid BankTransaction bankTransaction, BindingResult br) {
 		System.out.println("saveBankTransaction - bankTransaction: "+bankTransaction);
 		ModelAndView mav = new ModelAndView("bankTransactionForm");
 				
+		if (br.hasErrors()) {
+			mav.addObject("bankTransactions", bankTransactionService.findAll());
+			return mav;
+		}
+		
 		double transactionAmount = bankTransaction.getTransactionAmount();
 		
 		Long toAccountId = bankTransaction.getBankTransactionToAccount();

@@ -10,6 +10,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Bank Transaction Form</title>
+<style>
+	.error {
+		color: red;
+		font-weight: bold;
+	}
+</style>
 </head>
 <body>
 	<div align="center">
@@ -22,15 +28,27 @@
 				</tr>				
 			
 				<tr>
-					<td>To Account: </td> <td><f:input path="bankTransactionToAccount" value="${bt.bankTransactionToAccount}"/></td>
+					<td>To Account: </td> 
+					<td>
+						<f:input path="bankTransactionToAccount" value="${bt.bankTransactionToAccount}"/>
+						<f:errors path="bankTransactionToAccount" cssClass="error" />
+					</td>
 				</tr>		
 				
 				<tr>
-					<td>From Account: </td> <td><f:input path="bankTransactionFromAccount" value="${bt.bankTransactionFromAccount}"/></td>
+					<td>From Account: </td> 
+					<td>
+						<f:input path="bankTransactionFromAccount" value="${bt.bankTransactionFromAccount}"/>
+						<f:errors path="bankTransactionFromAccount" cssClass="error" />
+					</td>
 				</tr>	
 				
 				<tr>
-					<td>Transaction Amount: </td> <td><f:input path="transactionAmount" value="${bt.transactionAmount}"/></td>
+					<td>Transaction Amount: </td>
+					<td>
+						<f:input path="transactionAmount" value="${bt.transactionAmount}"/>
+						<f:errors path="transactionAmount" cssClass="error" />
+					</td>
 				</tr>
 				
 				<tr>
@@ -49,6 +67,7 @@
 				    <td>Transaction Date/Time: </td>
 					<td>
 					    <f:input path="bankTransactionDateTime" type="datetime-local" value="${bt.bankTransactionDateTime}" />
+					    <f:errors path="bankTransactionDateTime" cssClass="error" />
 					</td>
 
 				</tr>

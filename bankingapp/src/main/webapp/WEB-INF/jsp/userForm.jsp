@@ -11,7 +11,6 @@
 <style>
 	.error {
 		color: red;
-		font-style: italic;
 		font-weight: bold;
 	}
 </style>

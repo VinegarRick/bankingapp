@@ -3,6 +3,9 @@ package com.synergisticit.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +17,9 @@ import com.synergisticit.domain.Customer;
 import com.synergisticit.service.AccountService;
 import com.synergisticit.service.BranchService;
 import com.synergisticit.service.CustomerService;
+import com.synergisticit.validation.AccountValidator;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class AccountController {
@@ -21,7 +27,12 @@ public class AccountController {
 	@Autowired AccountService accountService;
 	@Autowired BranchService branchService;
 	@Autowired CustomerService customerService;
+	@Autowired AccountValidator accountValidator;
 	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.addValidators(accountValidator);
+	}
 	
 	@RequestMapping("accountForm")
 	public String accountForm(Account account, Model model) {
@@ -35,9 +46,17 @@ public class AccountController {
 	
 	
 	@RequestMapping("saveAccount")
-	public ModelAndView saveAccount(@ModelAttribute Account account, @RequestParam("accountBranch.branchId") Long branchId, @RequestParam("accountCustomer.customerId") Long customerId) {
+	public ModelAndView saveAccount(@ModelAttribute @Valid Account account, BindingResult br, @RequestParam("accountBranch.branchId") Long branchId, @RequestParam("accountCustomer.customerId") Long customerId) {
 		System.out.println("saveAccount - account: "+account);
 		ModelAndView mav = new ModelAndView("accountForm");
+		
+		if (br.hasErrors()) {
+			mav.addObject("accounts", accountService.findAll());
+			mav.addObject("branches", branchService.findAll());
+			mav.addObject("customers", customerService.findAll());		
+			
+			return mav;
+		}
 		
 	    Branch branch = branchService.find(branchId);
 	    account.setAccountBranch(branch);

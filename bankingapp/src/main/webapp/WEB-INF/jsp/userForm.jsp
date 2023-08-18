@@ -26,36 +26,38 @@
 </tr>
 
 <tr>
-<td>Name: </td><td> <f:input path="username" value="${u.username}"/></td>
-    <c:if test="${errors.hasFieldErrors('username') || errors.hasFieldErrors('user.username.length')}">
-    	<td> 
-			<f:errors path="username" cssClass="error"/>
-		<td>
-	</c:if>
+	<td>Name: </td>
+	<td> 
+		<f:input path="username" value="${u.username}"/>
+		<f:errors path="username" cssClass="error"/>
+	</td>
 
 </tr>
 
 <tr>
-<td>Password: </td><td> <f:input path="password"  value="${u.password}"/></td>
-    <c:if test="${errors.hasFieldErrors('password') || errors.hasFieldErrors('user.password.length')}">
-		<td> 
-			<f:errors path="password" cssClass="error"/>
-		<td>
-	</c:if>
+	<td>Password: </td>
+	<td> 
+		<f:input path="password"  value="${u.password}"/>
+		<f:errors path="password" cssClass="error"/>
+	</td>
 </tr>
+
 <tr>
-<td>Roles: </td>
-<td> 
-<c:forEach items="${roles}" var="r">
-	<c:choose>
-		<c:when test="${selectedRoles.contains(r) }">
-			<f:checkbox path="roles" label ="${r.roleName}" value="${r.roleId}" checked="true"/>
-		</c:when>
-	<c:otherwise>
-		<f:checkbox path="roles" label ="${r.roleName}" value="${r.roleId}" />
-	</c:otherwise>
-	</c:choose>
-</c:forEach>
+	<td>Roles: </td>
+	<td> 
+		<c:forEach items="${roles}" var="r">
+			<c:choose>
+				<c:when test="${selectedRoles.contains(r) }">
+					<f:checkbox path="roles" label ="${r.roleName}" value="${r.roleId}" checked="true"/>
+				</c:when>
+			<c:otherwise>
+				<f:checkbox path="roles" label ="${r.roleName}" value="${r.roleId}" />
+			</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<f:errors path="roles" cssClass="error"/>
+	</td>
+</tr>
 
 <tr>
 <td colspan="2" align="center"> <input type="submit" value="submit"></td>

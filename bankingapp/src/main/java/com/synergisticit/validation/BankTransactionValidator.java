@@ -19,15 +19,17 @@ public class BankTransactionValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		BankTransaction bankTransaction = (BankTransaction) target;
 				
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "bankTransactionDateTime", "bankTransaction.bankTransactionDateTime", "Date and time must be selected.");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "bankTransactionDateTime", "bankTransaction.bankTransactionDateTime.empty", "Date and time must be selected.");
+        
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "transactionType", "bankTransaction.transactionType.empty", "Transaction type must be selected.");
 		
 		if (bankTransaction.getBankTransactionFromAccount() == null && bankTransaction.getBankTransactionToAccount() == null) {
-			errors.rejectValue("bankTransactionToAccount", "bankTransaction.bankTransactionToAccount", "To Account and From Account cannot both be empty.");
-			errors.rejectValue("bankTransactionFromAccount", "bankTransaction.bankTransactionFromAccount", "To Account and From Account cannot both be empty.");
+			errors.rejectValue("bankTransactionToAccount", "bankTransaction.bankTransactionToAccount.empty", "To Account and From Account cannot both be empty.");
+			errors.rejectValue("bankTransactionFromAccount", "bankTransaction.bankTransactionFromAccount.empty", "To Account and From Account cannot both be empty.");
 		}
 		
 		if (bankTransaction.getTransactionAmount() < 0) {
-			errors.rejectValue("transactionAmount", "bankTransaction.transactionAmount", "Transaction amount cannot be negative.");
+			errors.rejectValue("transactionAmount", "bankTransaction.transactionAmount.negative", "Transaction amount cannot be negative.");
 		}
 	}
 }

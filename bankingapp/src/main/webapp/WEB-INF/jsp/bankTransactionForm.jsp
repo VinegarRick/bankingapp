@@ -55,11 +55,13 @@
 				    <td>Transaction Type: </td>
 				    <td>
 				        <f:select path="transactionType">
+				        	<f:option value="" label="Choose transaction type" />
 				            <f:option value="NEW_ACCOUNT" label="New Account" />
 				            <f:option value="DEPOSIT" label="Deposit" />
 				            <f:option value="WITHDRAWAL" label="Withdrawal" />
 				            <f:option value="TRANSFER" label="Transfer" />
 				        </f:select>
+				        <f:errors path="transactionType" cssClass="error" />
 				    </td>
 				</tr>	
 				

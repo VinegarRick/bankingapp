@@ -18,9 +18,9 @@ public class AccountValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Account account =  (Account) target;
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "accountHolder", "account.getAccountHolder().empty", "Account holder is a required field");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "accountHolder", "account.accountHolder.empty", "Account holder is a required field");
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "accountType", "account.getAccountType().empty", "Account type is a required field");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "accountType", "account.accountType.empty", "Account type is a required field");
 		
 		
 	}

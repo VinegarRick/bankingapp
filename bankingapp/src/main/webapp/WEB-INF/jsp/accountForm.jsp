@@ -9,6 +9,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Account Form</title>
+<style>
+	.error {
+		color: red;
+		font-weight: bold;
+	}
+</style>
 </head>
 <body>
 	<div align="center">
@@ -20,17 +26,23 @@
 				</tr>
 				
 				<tr>
-					<td>Account Holder: </td> <td><f:input path="accountHolder" value="${a.accountHolder}"/></td>
+					<td>Account Holder: </td> 
+					<td>
+						<f:input path="accountHolder" value="${a.accountHolder}"/>
+						<f:errors path="accountHolder" cssClass="error" />
+					</td>
 				</tr>				
 				
 				<tr>
 				    <td>Account Type: </td>
 				    <td>
 				        <f:select path="accountType">
+				        	<f:option value="" label="Choose account type" />
 				            <f:option value="SAVINGS" label="Savings" />
 				            <f:option value="CHECKING" label="Checking" />
 				            <f:option value="LOAN" label="Loan" />
 				        </f:select>
+				        <f:errors path="accountType" cssClass="error" />
 				    </td>
 				</tr>
 

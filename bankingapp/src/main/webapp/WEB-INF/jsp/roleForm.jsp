@@ -9,6 +9,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Role Form</title>
+<style>
+	.error {
+		color: red;
+		font-weight: bold;
+	}
+</style>
 </head>
 <body>
 	<div align="center">
@@ -20,7 +26,10 @@
 				</tr>
 				
 				<tr>
-					<td>Role name: </td> <td><f:input path="roleName" value="${r.roleName}"/> </td>
+					<td>Role name: </td> 
+						<td><f:input path="roleName" value="${r.roleName}"/> 
+						<f:errors path="roleName" cssClass="error" />
+					</td>
 				</tr>
 				
 				<tr>

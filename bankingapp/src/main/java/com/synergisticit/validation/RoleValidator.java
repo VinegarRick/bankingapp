@@ -21,8 +21,13 @@ public class RoleValidator implements Validator {
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "roleName", "role.roleName.empty", "Role name is a required field.");
 		
-		if (role.getRoleName().length() < 3) {
-			errors.rejectValue("roleName", "role.roleName", "Role name must have at least 3 characters");
+		String roleName = role.getRoleName();
+		if (roleName != null && !roleName.isEmpty() && !Character.isUpperCase(roleName.charAt(0))) {
+			errors.rejectValue("roleName", "role.roleName.titleCase", "First letter of role name must be capitalized");
+		}
+		
+		if (roleName.length() < 3 && roleName.length() > 0) {
+			errors.rejectValue("roleName", "role.roleName.length", "Role name must have at least 3 characters");
 		}
 	}
 }

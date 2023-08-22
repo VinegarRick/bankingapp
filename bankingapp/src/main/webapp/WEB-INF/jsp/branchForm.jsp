@@ -9,6 +9,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Branch Form</title>
+<style>
+	.error {
+		color: red;
+		font-weight: bold;
+	}
+</style>
 </head>
 <body>
 	<div align="center">
@@ -20,31 +26,58 @@
 				</tr>
 				
 				<tr>
-					<td>Branch Name: </td> <td><f:input path="branchName" value="${b.branchName}"/> </td>
+					<td>Branch Name: </td> 
+					<td>
+						<f:input path="branchName" value="${b.branchName}"/> 
+						<f:errors path="branchName" cssClass="error" />
+					</td>
 				</tr>
 				
 				<tr>
-					<td>Branch Address 1: </td> <td><f:input path="branchAddress.addressLine1" value="${b.branchAddress.addressLine1}"/> </td>
+					<td>Branch Address 1: </td> 
+					<td>
+						<f:input path="branchAddress.addressLine1" value="${b.branchAddress.addressLine1}"/> 
+						<f:errors path="branchAddress.addressLine1" cssClass="error" />
+					</td>
 				</tr>
 				
 				<tr>
-					<td>Branch Address 2: </td> <td><f:input path="branchAddress.addressLine2" value="${b.branchAddress.addressLine2}"/> </td>
+					<td>Branch Address 2: </td> 
+					<td>
+						<f:input path="branchAddress.addressLine2" value="${b.branchAddress.addressLine2}"/> 	
+					</td>
 				</tr>				
 				
 				<tr>
-					<td>City: </td> <td><f:input path="branchAddress.city" value="${b.branchAddress.city}"/> </td>
+					<td>City: </td> 
+					<td>
+						<f:input path="branchAddress.city" value="${b.branchAddress.city}"/> 
+						<f:errors path="branchAddress.city" cssClass="error" />
+					</td>
 				</tr>
 				
 				<tr>
-					<td>State: </td> <td><f:input path="branchAddress.state" value="${b.branchAddress.state}"/> </td>
+					<td>State: </td> 
+					<td>
+						<f:input path="branchAddress.state" value="${b.branchAddress.state}"/> 
+						<f:errors path="branchAddress.state" cssClass="error" />
+					</td>
 				</tr>				
 				
 				<tr>
-					<td>Country: </td> <td><f:input path="branchAddress.country" value="${b.branchAddress.country}"/> </td>
+					<td>Country: </td> 
+					<td>
+						<f:input path="branchAddress.country" value="${b.branchAddress.country}"/> 
+						<f:errors path="branchAddress.country" cssClass="error" />
+					</td>
 				</tr>				
 				
 				<tr>
-					<td>ZIP Code: </td> <td><f:input path="branchAddress.zipcode" value="${b.branchAddress.zipcode}"/> </td>
+					<td>ZIP Code: </td> 
+					<td>
+						<f:input path="branchAddress.zipcode" value="${b.branchAddress.zipcode}"/> 
+						<f:errors path="branchAddress.zipcode" cssClass="error" />
+					</td>
 				</tr>
 				
 				<tr>

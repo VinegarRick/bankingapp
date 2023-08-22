@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,12 +19,21 @@ import com.synergisticit.domain.Role;
 import com.synergisticit.domain.User;
 import com.synergisticit.service.CustomerService;
 import com.synergisticit.service.UserService;
+import com.synergisticit.validation.CustomerValidator;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class CustomerController {
 	
 	@Autowired CustomerService customerService;
 	@Autowired UserService userService;
+	@Autowired CustomerValidator customerValidator;
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.addValidators(customerValidator);
+	}
 	
 	@RequestMapping("customerForm")
 	public String customerForm(Customer customer, Model model) {
@@ -33,15 +45,19 @@ public class CustomerController {
 	
 	
 	@RequestMapping("saveCustomer")
-	public ModelAndView saveCustomer(@ModelAttribute Customer customer, @RequestParam("user.userId") Long userId) {
+	public ModelAndView saveCustomer(@ModelAttribute @Valid Customer customer, BindingResult br) {
 		System.out.println("saveCustomer - customer: "+customer);
 		ModelAndView mav = new ModelAndView("customerForm");
+		mav.addObject("customers", customerService.findAll());
 		
-		User user = userService.find(userId);
+		if (br.hasErrors()) {
+			return mav;
+		}
+		
+		User user = userService.find(customer.getUserId());
 		customer.setUser(user);
 		
 		customerService.save(customer);
-		mav.addObject("customers", customerService.findAll());
 		
 		return mav;
 	}

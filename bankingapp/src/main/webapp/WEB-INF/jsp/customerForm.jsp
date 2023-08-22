@@ -9,6 +9,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Customer Form</title>
+<style>
+	.error {
+		color: red;
+		font-weight: bold;
+	}
+</style>
 </head>
 <body>
 <div align="center">
@@ -21,7 +27,11 @@
 </tr>
 
 <tr>
-	<td>Name: </td><td> <f:input path="customerName" value="${c.customerName}"/></td>
+	<td>Name: </td>
+	<td> 
+		<f:input path="customerName" value="${c.customerName}"/>
+		<f:errors path="customerName" cssClass="error" />
+	</td>
 </tr>
 
 <tr>
@@ -30,51 +40,90 @@
       <f:checkbox path="customerGender" value="Male"/> Male
       <f:checkbox path="customerGender" value="Female"/> Female
       <f:checkbox path="customerGender" value="Other"/> Other
+      <f:errors path="customerGender" cssClass="error" />
     </td>
 </tr>
 
 <tr>
     <td>Date of Birth: </td>
-    <td><input type="date" name="customerDob" value="${c.customerDob}" /></td>
+    <td>
+    	<input type="date" name="customerDob" value="${c.customerDob}" />
+    	<f:errors path="customerDob" cssClass="error" />
+    </td>
 </tr>
 
 <tr>
-	<td>Mobile Number: </td><td> <f:input path="customerMobileNum" value="${c.customerMobileNum}"/></td>
+	<td>Mobile Number: </td>
+	<td> 
+		<f:input path="customerMobileNum" value="${c.customerMobileNum}"/>
+		<f:errors path="customerMobileNum" cssClass="error" />
+	</td>
 </tr>
 
 <tr>
-	<td>Customer Address 1: </td> <td><f:input path="customerAddress.addressLine1" value="${c.customerAddress.addressLine1}"/> </td>
+	<td>Branch Address 1: </td> 
+	<td>
+		<f:input path="customerAddress.addressLine1" value="${c.customerAddress.addressLine1}"/> 
+		<f:errors path="customerAddress.addressLine1" cssClass="error" />
+	</td>
 </tr>
 
 <tr>
-	<td>Customer Address 2: </td> <td><f:input path="customerAddress.addressLine2" value="${c.customerAddress.addressLine2}"/> </td>
+	<td>Branch Address 2: </td> 
+	<td>
+		<f:input path="customerAddress.addressLine2" value="${c.customerAddress.addressLine2}"/> 	
+	</td>
 </tr>				
 
 <tr>
-	<td>City: </td> <td><f:input path="customerAddress.city" value="${c.customerAddress.city}"/> </td>
+	<td>City: </td> 
+	<td>
+		<f:input path="customerAddress.city" value="${c.customerAddress.city}"/> 
+		<f:errors path="customerAddress.city" cssClass="error" />
+	</td>
 </tr>
 
 <tr>
-	<td>State: </td> <td><f:input path="customerAddress.state" value="${c.customerAddress.state}"/> </td>
+	<td>State: </td> 
+	<td>
+		<f:input path="customerAddress.state" value="${c.customerAddress.state}"/> 
+		<f:errors path="customerAddress.state" cssClass="error" />
+	</td>
 </tr>				
 
 <tr>
-	<td>Country: </td> <td><f:input path="customerAddress.country" value="${c.customerAddress.country}"/> </td>
+	<td>Country: </td> 
+	<td>
+		<f:input path="customerAddress.country" value="${c.customerAddress.country}"/> 
+		<f:errors path="customerAddress.country" cssClass="error" />
+	</td>
 </tr>				
 
 <tr>
-	<td>ZIP Code: </td> <td><f:input path="customerAddress.zipcode" value="${c.customerAddress.zipcode}"/> </td>
+	<td>ZIP Code: </td> 
+	<td>
+		<f:input path="customerAddress.zipcode" value="${c.customerAddress.zipcode}"/> 
+		<f:errors path="customerAddress.zipcode" cssClass="error" />
+	</td>
 </tr>
 
 <tr>
-	<td>Real Id: </td><td> <f:input path="realId" value="${c.realId}"/></td>
+	<td>Real Id: </td>
+	<td> 
+		<f:input path="realId" value="${c.realId}"/>
+		<f:errors path="realId" cssClass="error" />
+	</td>
 </tr>
 
 <tr>
-	<td>User Id: </td> <td><f:input path="user.userId"/></td>
+	<td>User Id: </td> 
+	<td>
+		<f:input path="userId" value="${c.userId}"/>
+		<f:errors path="userId" cssClass="error" />
+	</td>
 </tr>	
 
-<f:hidden path="user.userId" />
+<!--<f:hidden path="user.userId" />-->
 
 <tr>
 <td colspan="2" align="center"> <input type="submit" value="submit"></td>

@@ -26,15 +26,12 @@ import java.util.List;
 @Entity
 public class Branch {
 	
-	@NotNull
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
 	private Long branchId;
 	
-	@NotEmpty
 	private String branchName;
 	
-	@Valid
 	@Embedded
 	private Address branchAddress;
 	

@@ -21,6 +21,14 @@ public class BranchValidator implements Validator {
 			
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "branchName", "branch.branchName.empty", "Branch name is a required field.");
 			
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "branchAddress", "branch.branchAddress.empty", "Branch address is a required field.");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "branchAddress.addressLine1", "branch.branchAddress.addressLine1.empty", "Branch address 1 is a required field.");
+			
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "branchAddress.city", "branch.branchAddress.city.empty", "City is a required field.");
+			
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "branchAddress.state", "branch.branchAddress.state", "State is a required field.");
+			
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "branchAddress.country", "branch.branchAddress.country.empty", "Country is a required field.");
+			
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "branchAddress.zipcode", "branch.branchAddress.zipcode.empty", "Zip code is a required field.");
 		}
 }

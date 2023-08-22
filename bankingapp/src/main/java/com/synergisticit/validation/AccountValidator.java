@@ -22,6 +22,10 @@ public class AccountValidator implements Validator {
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "accountType", "account.accountType.empty", "Account type is a required field");
 		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "accountDateOpen", "account.accountDateOpen.empty", "Date is a required field");
 		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "branchId", "account.branchId.empty", "Branch Id is a required field");
+		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "customerId", "account.customerId.empty", "Customer Id is a required field");
 	}
 }

@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,5 +47,10 @@ public class Account {
 	@ManyToOne
 	private Customer accountCustomer;
 	
+	@Transient
+	private Long branchId;
+	
+	@Transient
+	private Long customerId;
 	
 }

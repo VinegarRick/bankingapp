@@ -46,7 +46,8 @@ public class AccountController {
 	
 	
 	@RequestMapping("saveAccount")
-	public ModelAndView saveAccount(@ModelAttribute @Valid Account account, BindingResult br, @RequestParam("accountBranch.branchId") Long branchId, @RequestParam("accountCustomer.customerId") Long customerId) {
+	public ModelAndView saveAccount(@ModelAttribute @Valid Account account, BindingResult br) {
+	//public ModelAndView saveAccount(@ModelAttribute @Valid Account account, BindingResult br, @RequestParam("accountBranch.branchId") Long branchId, @RequestParam("accountCustomer.customerId") Long customerId) {
 		System.out.println("saveAccount - account: "+account);
 		ModelAndView mav = new ModelAndView("accountForm");
 		
@@ -58,10 +59,10 @@ public class AccountController {
 			return mav;
 		}
 		
-	    Branch branch = branchService.find(branchId);
+	    Branch branch = branchService.find(account.getBranchId());
 	    account.setAccountBranch(branch);
 		
-	    Customer customer = customerService.find(customerId);
+	    Customer customer = customerService.find(account.getCustomerId());
 	    account.setAccountCustomer(customer);
 		
 		accountService.save(account);

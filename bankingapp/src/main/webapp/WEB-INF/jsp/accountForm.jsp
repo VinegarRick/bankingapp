@@ -53,19 +53,31 @@
 				
 				<tr>
 				    <td>Today's Date: </td>
-				    <td><input type="date" name="accountDateOpen" value="${a.accountDateOpen}" /></td>
+				    <td>
+				    	<input type="date" name="accountDateOpen" value="${a.accountDateOpen}" />
+				    	<f:errors path="accountDateOpen" cssClass="error" />
+				    </td>
+				    
 				</tr>
 				
 				<tr>
-					<td>Branch Id: </td> <td><f:input path="accountBranch.branchId"/></td>
+					<td>Branch Id: </td> 
+					<td>
+						<f:input path="branchId" value="${a.branchId}"/>
+						<f:errors path="branchId" cssClass="error" />
+					</td>
 				</tr>		
 				
 				<tr>
-					<td>Customer Id: </td> <td><f:input path="accountCustomer.customerId"/></td>
+					<td>Customer Id: </td> 
+					<td>
+						<f:input path="customerId" value="${a.customerId}"/>
+						<f:errors path="customerId" cssClass="error" />
+					</td>
 				</tr>				
 				
-				    <f:hidden path="accountBranch.branchId" />
-    				<f:hidden path="accountCustomer.customerId" />
+				    <!--<f:hidden path="accountBranch.branchId" />
+    				<f:hidden path="accountCustomer.customerId" />-->
 				
 				
 				<tr>

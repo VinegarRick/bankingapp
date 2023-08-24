@@ -1,6 +1,9 @@
 package com.synergisticit.domain;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.ArrayList;
 
 import jakarta.persistence.CascadeType;
@@ -35,5 +38,6 @@ public class User {
 		
 		@JoinTable(name="user_role", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
 		@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+		@JsonManagedReference
 		private List<Role> roles = new ArrayList<>();
 }

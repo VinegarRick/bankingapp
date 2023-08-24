@@ -10,6 +10,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.ArrayList;
 
 @Setter
@@ -26,5 +29,6 @@ public class Role {
 	private String roleName;
 	
 	@ManyToMany(mappedBy="roles")
+	@JsonBackReference
 	private List<User> users = new ArrayList<>();
 }

@@ -31,5 +31,13 @@ public class BankTransactionValidator implements Validator {
 		if (bankTransaction.getTransactionAmount() < 0) {
 			errors.rejectValue("transactionAmount", "bankTransaction.transactionAmount.negative", "Transaction amount cannot be negative.");
 		}
+		
+		if (bankTransaction.getBankTransactionToAccount() != null && bankTransaction.getBankTransactionToAccount() < 1) {
+			errors.rejectValue("bankTransactionToAccount", "bankTransaction.bankTransactionToAccount.invalid", "Account Id cannot be less than 1");
+		}
+		
+		if (bankTransaction.getBankTransactionFromAccount() != null && bankTransaction.getBankTransactionFromAccount() < 1) {
+			errors.rejectValue("bankTransactionFromAccount", "bankTransaction.bankTransactionFromAccount.invalid", "Account Id cannot be less than 1");
+		}
 	}
 }

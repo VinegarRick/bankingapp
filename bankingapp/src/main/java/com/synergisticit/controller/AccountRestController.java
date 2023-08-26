@@ -1,6 +1,7 @@
 package com.synergisticit.controller;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,9 +47,11 @@ public class AccountRestController {
 		binder.addValidators(accountValidator);
 	}
 	
-	@GetMapping
-	public List<Account> getAllAccounts() {
-		return accountService.findAll();
+	@GetMapping(value="account/getAll")
+	public ResponseEntity<List<Account>> getAllAccounts() {
+		List<Account> accountList = accountService.findAll();
+		
+		return new ResponseEntity<List<Account>>(accountList, HttpStatus.OK);
 	}
 	
 	@PostMapping(value="account/create")
@@ -67,8 +70,6 @@ public class AccountRestController {
 			}
 			//return ResponseEntity.badRequest().body("Validation failed");
 			return new ResponseEntity<StringBuilder>(sb, HttpStatus.ACCEPTED);
-		} else if (accountService.find(account.getAccountId()) != null) {
-			return new ResponseEntity<String>("Account record with id \"" + account.getAccountId() + "\" already exists.", HttpStatus.FOUND);
 		} else {
 		    Branch branch = branchService.find(account.getBranchId());
 		    account.setAccountBranch(branch);
@@ -88,7 +89,24 @@ public class AccountRestController {
 		Account a = accountService.find(accountId);
 		
 		if (a != null) {
-			accountService.save(account);
+			if (account.getAccountHolder() != null) {
+				a.setAccountHolder(account.getAccountHolder());
+			}
+			
+			if (account.getAccountType() != null) {
+				a.setAccountType(account.getAccountType());
+			}
+			
+			if (account.getAccountDateOpen() != null) {
+				a.setAccountDateOpen(account.getAccountDateOpen());
+			}
+			
+			if (account.getAccountHolder() != null) {
+				a.setAccountHolder(account.getAccountHolder());
+			}
+			
+			accountService.save(a);
+			
 			return new ResponseEntity<String>("Account record updated for id: " + accountId, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<String>("There is no account with id: " + accountId, HttpStatus.NOT_FOUND);
@@ -96,8 +114,8 @@ public class AccountRestController {
 	}
 	
 	@DeleteMapping("account/delete")
-	public ResponseEntity<?> deleteAccount(@RequestParam long accountId, @RequestBody Account account) {
-		System.out.println("deleteAccount - account: "+account);
+	public ResponseEntity<?> deleteAccount(@RequestParam long accountId) {
+		System.out.println("deleteAccount - accountId: " + accountId);
 		Account a = accountService.find(accountId);
 		if (a != null) {
 			accountService.delete(accountId);

@@ -53,8 +53,18 @@ public class BankTransactionController {
 		}
 		
 		double transactionAmount = bankTransaction.getTransactionAmount();
-		
 		Long toAccountId = bankTransaction.getBankTransactionToAccount();
+		Long fromAccountId = bankTransaction.getBankTransactionFromAccount();
+		
+		if (toAccountId != null && fromAccountId != null) {
+			bankTransactionService.balanceTransfer(fromAccountId, toAccountId, transactionAmount);
+		} else if (toAccountId != null) {
+			bankTransactionService.addBalance(toAccountId, transactionAmount);
+		} else {
+			bankTransactionService.subtractBalance(fromAccountId, transactionAmount);
+		}
+		
+		/*Long toAccountId = bankTransaction.getBankTransactionToAccount();
 		if (toAccountId != null && toAccountId > 0) {
 			Account toAccount = accountService.find(toAccountId);
 			toAccount.setAccountBalance(toAccount.getAccountBalance() + transactionAmount);
@@ -64,7 +74,7 @@ public class BankTransactionController {
 		if (fromAccountId != null && fromAccountId > 0) {
 			Account fromAccount = accountService.find(fromAccountId);
 			fromAccount.setAccountBalance(fromAccount.getAccountBalance() - transactionAmount);
-		}
+		}*/
 		
 		bankTransactionService.save(bankTransaction);
 		mav.addObject("bankTransactions", bankTransactionService.findAll());

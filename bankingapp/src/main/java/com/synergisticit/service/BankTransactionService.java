@@ -10,4 +10,7 @@ public interface BankTransactionService {
 	List<BankTransaction> findAll();
 	void delete(Long bankTransactionId);
 	boolean exists(Long bankTransactionId);
+	void balanceTransfer(Long fromAccountId, Long toAccountId, double amount);
+	void subtractBalance(Long fromAccountId, double amount);
+	void addBalance(Long toAccountId, double amount);
 }

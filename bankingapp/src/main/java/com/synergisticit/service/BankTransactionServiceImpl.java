@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.synergisticit.domain.BankTransaction;
 import com.synergisticit.repository.BankTransactionRepository;
@@ -54,6 +55,25 @@ public class BankTransactionServiceImpl implements BankTransactionService {
 	@Override
 	public boolean exists(Long bankTransactionId) {
 		return bankTransactionRepository.existsById(bankTransactionId);
+	}
+	
+	@Transactional
+	@Override
+    public void balanceTransfer(Long fromAccountId, Long toAccountId, double amount) {
+        bankTransactionRepository.updateAccountBalanceSubtractFrom(fromAccountId, amount);
+        bankTransactionRepository.updateAccountBalanceAddTo(toAccountId, amount);
+    }	
+	
+	@Transactional
+	@Override
+	public void subtractBalance(Long fromAccountId, double amount) {
+		bankTransactionRepository.updateAccountBalanceSubtractFrom(fromAccountId, amount);
+	}
+	
+	@Transactional
+	@Override
+	public void addBalance(Long toAccountId, double amount) {
+		bankTransactionRepository.updateAccountBalanceAddTo(toAccountId, amount);
 	}
 
 }

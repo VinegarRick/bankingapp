@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -47,6 +49,7 @@ public class Customer {
 	@OneToMany(mappedBy="accountCustomer")
 	private List<Account> customerAccounts;
 	
+	@JsonIgnore
 	@JoinColumn(name="userId")
 	@OneToOne
 	private User user;

@@ -10,4 +10,5 @@ public interface UserService {
 	List<User> findAll();
 	void delete(Long userId);
 	boolean exists(Long userId);
+	User findUserByUsername(String userName);
 }

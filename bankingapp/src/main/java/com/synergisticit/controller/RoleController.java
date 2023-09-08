@@ -44,6 +44,9 @@ public class RoleController {
 			return mav;
 		}
 		
+		mav = new ModelAndView("redirect:/customerForm");
+		mav.addObject("roles", roleService.findAll());
+		
 		roleService.save(role);
 		
 		return mav;

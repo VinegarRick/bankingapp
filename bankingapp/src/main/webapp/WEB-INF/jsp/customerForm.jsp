@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f" %>  
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>     
+<%@ include file ="header.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -19,6 +18,7 @@
 <body>
 <div align="center">
 <h1>Customer Form</h1>
+<%@ include file ="menu.jsp" %><br><br>
 <f:form action="saveCustomer" modelAttribute="customer">
 <table border="1">
 
@@ -158,9 +158,11 @@
 			</c:forEach>
 		</td>		
 		<td>
-			<a href="updateCustomer?customerId=${c.getCustomerId()}">Update</a>
-			|
-			<a href="deleteCustomer?customerId=${c.getCustomerId()}">Delete</a>
+			<sec:authorize access="hasAuthority(\"Admin\")">
+				<a href="updateCustomer?customerId=${c.getCustomerId()}">Update</a>
+				|
+				<a href="deleteCustomer?customerId=${c.getCustomerId()}">Delete</a>
+			</sec:authorize>
 		</td>
 	</tr>
 </c:forEach>

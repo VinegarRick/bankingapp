@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.synergisticit.domain.User;
@@ -16,9 +17,13 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	UserRepository userRepository;
+	@Autowired 
+	BCryptPasswordEncoder bCrypt;
 
 	@Override
 	public User save(User u) {
+		u.setPassword(bCrypt.encode(u.getPassword()));
+		
 		return userRepository.save(u);
 	}
 

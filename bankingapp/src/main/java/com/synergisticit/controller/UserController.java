@@ -1,6 +1,7 @@
 package com.synergisticit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -55,6 +56,10 @@ public class UserController {
 		}
 		
 		userService.save(user);
+		
+		mav = new ModelAndView("redirect:/userForm");
+		mav.addObject("users", userService.findAll());
+		mav.addObject("roles", roleService.findAll());		
 		
 		return mav;
 	}

@@ -49,8 +49,10 @@ public class BranchController {
 		
 		branchService.save(branch);
 		
+		mav = new ModelAndView("redirect:/branchForm");
+		mav.addObject("branches", branchService.findAll());
+		
 		return mav;
-		//return "redirect:/branchForm";
 	}
 	
 	@RequestMapping("updateBranch")

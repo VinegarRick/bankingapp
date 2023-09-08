@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f" %>  
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>     
+<%@ include file ="header.jsp" %>
     
 <!DOCTYPE html>
 <html>
@@ -19,6 +18,8 @@
 <body>
 	<div align="center">
 		<h1>Role Form</h1>
+		<%@ include file ="menu.jsp" %><br><br>
+		<sec:authorize access="hasAuthority(\"Admin\")">
 		<f:form action="saveRole" modelAttribute="role">
 			<table border="1">
 				<tr>
@@ -38,6 +39,7 @@
 				
 			</table>
 		</f:form>
+		</sec:authorize>
 		
 		<p/>
 		<p/>
@@ -59,9 +61,11 @@
 						</c:forEach>
 					</td>		
 					<td>
-						<a href="updateRole?roleId=${r.getRoleId()}">Update</a>
-						|
-						<a href="deleteRole?roleId=${r.getRoleId()}">Delete</a>
+						<sec:authorize access="hasAuthority(\"Admin\")">
+							<a href="updateRole?roleId=${r.getRoleId()}">Update</a>
+							|
+							<a href="deleteRole?roleId=${r.getRoleId()}">Delete</a>
+						</sec:authorize>
 					</td>
 				</tr>
 			</c:forEach>

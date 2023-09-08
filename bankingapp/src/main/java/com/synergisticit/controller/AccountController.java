@@ -66,6 +66,7 @@ public class AccountController {
 	    account.setAccountCustomer(customer);
 		
 		accountService.save(account);
+		mav = new ModelAndView("redirect:/accountForm");
 		mav.addObject("accounts", accountService.findAll());
 		mav.addObject("branches", branchService.findAll());
 		mav.addObject("customers", customerService.findAll());

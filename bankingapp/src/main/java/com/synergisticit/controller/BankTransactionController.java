@@ -77,6 +77,7 @@ public class BankTransactionController {
 		}*/
 		
 		bankTransactionService.save(bankTransaction);
+		mav = new ModelAndView("redirect:/bankTransactionForm");
 		mav.addObject("bankTransactions", bankTransactionService.findAll());
 		
 		return mav;

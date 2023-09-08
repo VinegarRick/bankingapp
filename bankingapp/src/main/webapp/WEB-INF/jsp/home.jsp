@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f" %>  
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ include file ="header.jsp" %>
  
 <!DOCTYPE html>
 <html>
@@ -21,7 +20,7 @@
 
 <br><strong>Authorities: <sec:authentication property="principal.authorities"/> </strong>
 
-<br><a href="logout" >logout</a>
+<br><a href="logout" >Log Out</a>
 
 <!--
 <sec:authorize access="!isAuthenticated()">

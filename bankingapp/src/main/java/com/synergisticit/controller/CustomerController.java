@@ -57,6 +57,9 @@ public class CustomerController {
 		User user = userService.find(customer.getUserId());
 		customer.setUser(user);
 		
+		mav = new ModelAndView("redirect:/customerForm");
+		
+		mav.addObject("customers", customerService.findAll());
 		customerService.save(customer);
 		
 		return mav;

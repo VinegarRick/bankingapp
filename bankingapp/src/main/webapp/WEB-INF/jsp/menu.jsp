@@ -7,7 +7,7 @@
 <a href="${pageContext.request.contextPath}/customerForm" >Customer Form</a> | 
 <a href="${pageContext.request.contextPath}/roleForm" >RoleForm</a> | 
 <a href="${pageContext.request.contextPath}/userForm" >User Form</a> |
-<a href="${pageContext.request.contextPath}/logout" >logout</a>
+<a href="${pageContext.request.contextPath}/logout" >Log Out</a>
 </div>
 
 <!--<div>
